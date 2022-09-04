@@ -1,0 +1,30 @@
+// xs shadertest [Color]
+//
+// Test color gradient, diffuse and voxel spread
+//
+// xs_begin
+// author : '@ramkosh'
+// arg : { name = 'Color'  var = 'm_color'  range = '1 256'  value = '1'  step = '1'  precision = '0' }
+// xs_end
+
+//===== built-in args =====
+// uniform vec3		i_volume_size;		// volume size [1-256]
+// uniform float	i_color_index;		// current color index [0-255]
+// uniform int		i_num_color_sels;	// number of color selections [1-255]
+
+//===== built-in functions ===== 
+// float voxel( vec3 v );				// get voxel color index
+// float color_sel( float k );			// get kth selected color index
+// vec4 palette( float index );			// get palette color
+
+float map(vec3 v) {
+	float index = voxel(v);
+    float mod = m_color;
+
+    float z1 = v.x;
+    float z2 = v.y;
+    float z3 = v.z;
+
+
+	return sqrt(z3-z2-z1)/sin(mod);
+}
